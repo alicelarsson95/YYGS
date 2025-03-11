@@ -1,0 +1,42 @@
+@use "../../Partials/Variables" as *;
+
+.cart__con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+ 
+}
+
+.cart__icon {
+  width: 50%; 
+   
+}
+
+.icon__con {
+  background-color: $bg-color-white;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: $border-radius-primary;
+  margin-bottom: 2.5rem;
+  margin-right: 1rem;
+ z-index: 10;
+}
+
+.cart__count {
+  position: absolute;
+  background: rgb(232, 79, 79);
+  color: $color-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  text-align: center;
+  border-radius: 50%;
+  margin-bottom: 5rem;
+  margin-left: 2rem;
+  width: 1.3rem;
+  height: 1.3rem;
+}

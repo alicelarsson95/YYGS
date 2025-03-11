@@ -1,0 +1,21 @@
+@use "../../Partials/Variables" as *;
+
+.dip-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  padding: 1rem;
+}
+
+.dip-button {
+  background-color: $bg-color-light-grey;
+  color: $bg-color-white;
+  font-size: $font-size-xs;
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius-primary;
+  border: none;
+  cursor: pointer;
+  width: 6.3rem;
+  height: 2rem;
+  white-space: nowrap;
+}

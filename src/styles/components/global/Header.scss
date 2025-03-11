@@ -1,0 +1,27 @@
+@use "../../Partials/Variables" as *;
+
+.header__con {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 1000;
+  }
+  
+  .header__wrapper {
+    width: 100%; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+  .header-logo {
+    height: 4rem;
+    margin-bottom: 1.5rem;
+  }
+  
