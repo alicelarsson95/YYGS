@@ -1,4 +1,4 @@
-const API_BASE_URL = "/api";
+const API_BASE_URL = "https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com"; 
 
 export const fetchApiKey = async (): Promise<string> => {
   let apiKey: string = localStorage.getItem("apiKey") ?? "";
@@ -9,7 +9,7 @@ export const fetchApiKey = async (): Promise<string> => {
       headers: { "Content-Type": "application/json" },
     });
 
-    if (!response.ok) throw new Error(`❌ Misslyckades att hämta API-nyckel: ${response.status}`);
+    if (!response.ok) throw new Error(`Misslyckades att hämta API-nyckel: ${response.status}`);
 
     const data = await response.json();
     apiKey = data.key;
@@ -17,20 +17,6 @@ export const fetchApiKey = async (): Promise<string> => {
   }
 
   return apiKey;
-};
-
-export const createTenant = async (tenantName: string) => {
-  const apiKey = await fetchApiKey();
-
-  const response = await fetch(`${API_BASE_URL}/tenant`, {
-    method: "POST",
-    headers: { "x-zocom": apiKey, "Content-Type": "application/json" },
-    body: JSON.stringify({ tenant: tenantName }),
-  });
-
-  if (!response.ok) throw new Error("❌ Misslyckades att skapa tenant");
-
-  return response.json();
 };
 
 export const fetchMenu = async () => {
@@ -41,8 +27,41 @@ export const fetchMenu = async () => {
     headers: { "x-zocom": apiKey, "Content-Type": "application/json" },
   });
 
-  if (!response.ok) throw new Error(`❌ Misslyckades att hämta menyn: ${response.status}`);
+  if (!response.ok) throw new Error(`Misslyckades att hämta menyn: ${response.status}`);
 
   const data = await response.json();
   return data.items;
+};
+
+export const createOrder = async (orderItems: any[]) => {
+  const apiKey = await fetchApiKey();
+  const tenantId = localStorage.getItem("tenantId"); 
+
+  if (!tenantId) {
+    throw new Error(" Tenant-ID saknas!");
+  }
+
+  const response = await fetch(`${API_BASE_URL}/${tenantId}/orders`, {  
+    method: "POST",
+    headers: { "x-zocom": apiKey, "Content-Type": "application/json" },
+    body: JSON.stringify({ items: orderItems }),
+  });
+
+  if (!response.ok) throw new Error("Misslyckades att skapa order");
+
+  return response.json(); 
+};
+
+
+export const getOrderStatus = async (orderId: string) => {
+  const apiKey = await fetchApiKey();
+
+  const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
+    method: "GET",
+    headers: { "x-zocom": apiKey },
+  });
+
+  if (!response.ok) throw new Error("Kunde inte hämta orderstatus");
+
+  return response.json();
 };

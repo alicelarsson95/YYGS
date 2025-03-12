@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// 📝 Orderns initiala state
 interface OrderState {
   orderId: string | null;
   eta: number | null;
@@ -13,7 +12,7 @@ const initialState: OrderState = {
   status: "pending",
 };
 
-// 📦 Skapa en Redux slice för orderhantering
+
 const orderSlice = createSlice({
   name: "order",
   initialState,
@@ -31,6 +30,6 @@ const orderSlice = createSlice({
   }
 });
 
-// ✅ Lägg till `export default orderSlice.reducer`
+
 export const { setOrder, clearOrder } = orderSlice.actions;
 export default orderSlice.reducer;

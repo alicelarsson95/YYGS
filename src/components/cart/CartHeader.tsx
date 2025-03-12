@@ -1,22 +1,19 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import CartIcon from "../../assets/Union.svg";
-
+import { Link } from "react-router-dom";
+import "../../styles/components/global/Cart.scss"
 
 const CartHeader = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
-  
-  const itemCount = cartItems
-    ? cartItems.reduce((acc: number, item) => acc + item.quantity, 0)
-    : 0;
+  const itemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <div className="cart__con">
-      <div className="icon__con">
+      <Link to="/cart" className="icon__con">
         <img src={CartIcon} alt="Cart" className="cart__icon" />
-      </div>
-      {itemCount > 0 && <span className="cart__count">{itemCount}</span>}
+        {itemCount > 0 && <span className="cart__count">{itemCount}</span>}
+      </Link>
     </div>
   );
 };

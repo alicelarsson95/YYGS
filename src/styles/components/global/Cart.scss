@@ -5,12 +5,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
- 
 }
 
 .cart__icon {
-  width: 50%; 
-   
+  width: 50%;
 }
 
 .icon__con {
@@ -23,8 +21,7 @@
   position: absolute;
   border-radius: $border-radius-primary;
   margin-bottom: 2.5rem;
-  margin-right: 1rem;
- z-index: 10;
+  margin-right: 2rem;
 }
 
 .cart__count {
@@ -35,8 +32,8 @@
   font-weight: $font-weight-normal;
   text-align: center;
   border-radius: 50%;
-  margin-bottom: 5rem;
-  margin-left: 2rem;
-  width: 1.3rem;
-  height: 1.3rem;
+  margin-bottom: 2.8rem;
+  margin-left: 4rem;
+  width: 1.4rem;
+  height: 1.4rem;
 }
