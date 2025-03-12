@@ -2,14 +2,14 @@ import "../../styles/components/menu/menu-list.scss";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMenu } from "../../store/slices/menuSlice";
-import { addToCart } from "../../store/slices/cartSlice"; 
+import { addToCart } from "../../store/slices/cartSlice";
 import { RootState, AppDispatch } from "../../store/store";
 
 interface MenuItem {
   id: number;
   name: string;
   description: string;
-  price: string; 
+  price: string;
   type: string;
   category?: string;
 }
@@ -25,7 +25,6 @@ const MenuList = () => {
 
   if (loading) return <p>Laddar menyn...</p>;
   if (error) return <p>Ett fel uppstod: {error}</p>;
-
 
   const categorizedItems = items.map((item: MenuItem) => {
     const newItem = { ...item };
@@ -58,7 +57,7 @@ const MenuList = () => {
                 <span className="menu-item-name">{item.name}</span>
                 <span className="menu-dots"></span>
                 <span className="menu-item-price">{item.price} SEK</span>
-           
+
                 <button
                   className="menu-add-button"
                   onClick={() =>
@@ -67,7 +66,7 @@ const MenuList = () => {
                         id: item.id,
                         name: item.name,
                         description: item.description,
-                        price: Number(item.price), 
+                        price: Number(item.price),
                         quantity: 1,
                       })
                     )

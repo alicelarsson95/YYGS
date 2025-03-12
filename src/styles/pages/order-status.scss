@@ -1,2 +1,78 @@
 @use "../partials/Variables" as *;
 
+.order-status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    min-height: 100vh;
+    text-align: center;
+    background-color: $bg-color-primary;
+    padding: 5rem;
+  }
+
+  .order-cart-icon {
+    width: 2.5rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 1rem; 
+    right: 1rem; 
+    border-radius: $border-radius-primary;
+    z-index: 100; 
+  }
+
+  .order-logo {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 17%;
+    margin: 1rem
+
+  }
+
+  .food-box {
+    width: 23rem;
+  }
+  
+  .eta {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: #ffffff;
+  }
+  
+  .order-id {
+    font-size: 1rem;
+    color: $color-white;
+    margin-bottom: 6rem;
+  }
+
+  .order-title {
+    color: $color-white;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 2rem;
+  }
+  
+  .new-order-btn {
+    color: $color-white;
+    background-color: $bg-color-black;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 20rem;
+    height: 4rem;
+    font-size: $font-size-xl;
+    font-weight: 500;
+    border-radius: 0.2rem;
+   
+  }
+  

@@ -26,7 +26,7 @@ export const getTenant = createAsyncThunk("tenant/createtenant", async (_, { rej
       "x-zocom": apiKey,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name: "AliceFoodTruck" }),
+    body: JSON.stringify({ name: "alicewontons" }),
   });
   if (!response.ok) {
     throw new Error(`API-fel: ${response.status}`)
@@ -36,7 +36,7 @@ export const getTenant = createAsyncThunk("tenant/createtenant", async (_, { rej
   return data.id
 } catch (error: any) {
     return rejectWithValue(error.message)
-}
+} 
 });
 
   const tenantSlice = createSlice({

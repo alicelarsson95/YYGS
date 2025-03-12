@@ -6,6 +6,9 @@ import "../styles/pages/myCart.scss";
 import CartIcon from "../assets/Union.svg";
 import { createOrder } from "../services/api";
 import { getTenant } from "../store/slices/tenantSlice";
+import { setOrder } from "../store/slices/orderSlice";
+import CartList from "../components/mycart/CartList";
+import CartSummary from "../components/mycart/CartSum";
 
 const MyCart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -18,15 +21,26 @@ const MyCart = () => {
 
   const handleCheckout = async () => {
     try {
-      if (!tenantId) {
+      let currentTenantId: string | undefined = tenantId ?? localStorage.getItem("tenantId") ?? undefined;
+
+      if (!currentTenantId) {
         console.warn("Tenant-ID saknas! Skapar en ny tenant...");
-        await dispatch(getTenant());
+        currentTenantId = await dispatch(getTenant()).unwrap();
       }
 
-       const order = await createOrder(cartItems); 
-      console.log("Beställning skapad:", order);
+      const orderResponse = await createOrder(cartItems, currentTenantId);
+      console.log("Beställning skapad:", orderResponse);
+
+      if (orderResponse && orderResponse.order && orderResponse.order.id) {
+        const orderId = orderResponse.order.id;
+        const eta = orderResponse.order.eta ?? 0;
+        dispatch(setOrder({ orderId, eta }));
+        navigate(`/order-status/${orderId}`);
+      } else {
+        console.error("Order-ID saknas i API-svar:", orderResponse);
+      }
+
       dispatch(clearCart());
-      navigate(`/orderstat-us/${order.id}`);
     } catch (error) {
       console.error("Fel vid beställning:", error);
     }
@@ -36,31 +50,13 @@ const MyCart = () => {
     <div className="cart-page">
       <img src={CartIcon} alt="Cart" className="cart__icon" />
       <h2 className="cart-title">Min Beställning</h2>
+
       {cartItems.length === 0 ? (
         <p className="empty-cart">Din varukorg är tom.</p>
       ) : (
         <div className="cart-container">
-          <ul className="cart-list">
-            {cartItems.map((item) => (
-              <li key={item.id} className="cart-item">
-                <span className="item-name">{item.name}</span>
-                <span className="item-dots"></span>
-                <span className="item-price">{item.price} SEK</span>
-                <button onClick={() => dispatch(removeFromCart(item.id))} className="remove-button">
-                  ❌
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          <div className="cart-total">
-            <span className="total-label">TOTALT</span>
-            <span className="total-price">{totalPrice} SEK</span>
-          </div>
-
-          <button className="checkout-button" onClick={handleCheckout} disabled={loading}>
-            {loading ? "Skapar Tenant..." : "TAKE MY MONEY!"}
-          </button>
+          <CartList items={cartItems} onRemove={(id) => dispatch(removeFromCart(id))} />
+          <CartSummary total={totalPrice} onCheckout={handleCheckout} loading={loading} />
         </div>
       )}
     </div>

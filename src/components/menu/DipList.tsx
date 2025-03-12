@@ -1,38 +1,38 @@
 import "../../styles/components/menu/dip-list.scss";
 import { useEffect, useState } from "react";
-import { fetchMenu } from "../../services/api";  // Importera fetchMenu för att hämta menyn från API
+import { fetchMenu } from "../../services/api"; 
 
 const DipList = () => {
-  const [dips, setDips] = useState<string[]>([]);  // State för dips
-  const [loading, setLoading] = useState<boolean>(true);  // Loading state
-  const [error, setError] = useState<string | null>(null);  // Error state
+  const [dips, setDips] = useState<string[]>([]);  
+  const [loading, setLoading] = useState<boolean>(true);  
+  const [error, setError] = useState<string | null>(null); 
 
   useEffect(() => {
     const fetchDips = async () => {
       try {
-        const menu = await fetchMenu();  // Hämtar hela menyn
-        // Filtrera för att bara få dips (t.ex. "DIPSÅS")
+        const menu = await fetchMenu();  
+      
         const dipItems = menu.filter((item: any) => item.name.toLowerCase().includes("dip"));
 
-        setDips(dipItems.map((item: any) => item.name));  // Sätt dipsarna i state
+        setDips(dipItems.map((item: any) => item.name));  
         setLoading(false);
       } catch (err) {
-        setError("Fel vid hämtning av dips");  // Hantera fel
+        setError("Fel vid hämtning av dips"); 
         setLoading(false);
       }
     };
 
-    fetchDips();  // Hämta dips när komponenten laddas
+    fetchDips();  
   }, []);
 
-  if (loading) return <p>Laddar dips...</p>;  // Visa laddning när data hämtas
-  if (error) return <p>{error}</p>;  // Visa felmeddelande om något går fel
+  if (loading) return <p>Laddar dips...</p>;  
+  if (error) return <p>{error}</p>;  
 
   return (
     <div className="dip-list">
       {dips.map((dip, index) => (
         <button key={index} className="dip-button">
-          {dip} {/* Visa varje dip i en knapp */}
+          {dip} 
         </button>
       ))}
     </div>

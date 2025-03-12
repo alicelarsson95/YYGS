@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com"; 
+const API_BASE_URL = "https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com";
 
 export const fetchApiKey = async (): Promise<string> => {
   let apiKey: string = localStorage.getItem("apiKey") ?? "";
@@ -33,30 +33,36 @@ export const fetchMenu = async () => {
   return data.items;
 };
 
-export const createOrder = async (orderItems: any[]) => {
+export const createOrder = async (orderItems: any[], tenantId?: string) => {
   const apiKey = await fetchApiKey();
-  const tenantId = localStorage.getItem("tenantId"); 
+
+  tenantId = tenantId ?? localStorage.getItem("tenantId") ?? "";
 
   if (!tenantId) {
     throw new Error(" Tenant-ID saknas!");
   }
 
-  const response = await fetch(`${API_BASE_URL}/${tenantId}/orders`, {  
+  const response = await fetch(`${API_BASE_URL}/${tenantId}/orders`, {
     method: "POST",
     headers: { "x-zocom": apiKey, "Content-Type": "application/json" },
-    body: JSON.stringify({ items: orderItems }),
+    body: JSON.stringify({ items: [orderItems.length] }),
   });
 
   if (!response.ok) throw new Error("Misslyckades att skapa order");
 
-  return response.json(); 
+  return response.json();
 };
 
-
-export const getOrderStatus = async (orderId: string) => {
+export const getOrderStatus = async (orderId: string, tenantId?: string) => {
   const apiKey = await fetchApiKey();
 
-  const response = await fetch(`${API_BASE_URL}/orders/${orderId}`, {
+  tenantId = tenantId ?? localStorage.getItem("tenantId") ?? "";
+
+  if (!tenantId) {
+    throw new Error("Tenant-ID saknas!");
+  }
+
+  const response = await fetch(`${API_BASE_URL}/${tenantId}/orders/${orderId}`, {
     method: "GET",
     headers: { "x-zocom": apiKey },
   });
