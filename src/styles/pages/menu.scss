@@ -33,3 +33,25 @@
   padding: 1rem;
   margin-left: -1rem;
 }
+
+@media (max-width:370px) {
+::-webkit-scrollbar {
+  width: 0.5rem; 
+}
+
+
+::-webkit-scrollbar-track {
+  background: $bg-color-primary; 
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: $bg-color-light-grey; 
+  border-radius: $border-radius-primary; 
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: lighten($bg-color-black, 10%);
+}
+}

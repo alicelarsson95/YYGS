@@ -10,6 +10,7 @@ export const getMenu = createAsyncThunk("menu/getMenu", async () => {
   });
 
   const data = await response.json();
+  console.log("Data från API:", data);
   return data.items; 
 });
 
