@@ -1,7 +1,6 @@
-import "../../styles/components/global/Header.scss";
-import { Link } from "react-router-dom"; 
+import "../../styles/components/global/Header.scss"; 
 import YYGS from "../../assets/YYGS.png";
-import CartHeader from "../cart/CartHeader"
+import CartHeader from "./CartHeader"
 
 const Header = () => {
   return (

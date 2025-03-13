@@ -1,4 +1,3 @@
-
 interface CartItemProps {
     id: number;
     name: string;

@@ -1,4 +1,3 @@
-
 import CartItem from "./CartItem";
 
 interface CartItemType {
@@ -13,11 +12,13 @@ interface CartListProps {
   onRemove: (id: number) => void;
 }
 
-const CartList: React.FC<CartListProps> = ({ items, onRemove }) => {
+const CartList = ({ items, onRemove }: CartListProps) => {
   return (
     <ul className="cart-list">
       {items.map((item) => (
-        <CartItem key={item.id} id={item.id} name={item.name} price={item.price} onRemove={onRemove} />
+        <CartItem key={item.id}
+         id={item.id} name={item.name}
+          price={item.price} onRemove={onRemove} />
       ))}
     </ul>
   );

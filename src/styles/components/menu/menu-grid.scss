@@ -9,12 +9,17 @@
 }
 
 .menu-grid-container h2 {
-  margin-bottom: 0.3125rem; 
+  margin-bottom: 0.4rem;
+  text-align: left;
+}
+
+p {
+  text-align: left;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(6.25rem, 1fr)); // 100px
+  grid-template-columns: repeat(auto-fit, minmax(6.25rem, 1fr));
   gap: 0.625rem; 
   margin-top: 0.625rem; 
 }
@@ -27,8 +32,12 @@
   border-radius: $border-radius-primary;
   font-size: $font-size-sm;
   cursor: pointer;
+  max-width: 8.1rem;
+  max-height: 3rem;
+  white-space: nowrap;
 }
 
 .grid-button:hover {
   background-color: lighten($bg-color-secondary, 10%);
 }
+

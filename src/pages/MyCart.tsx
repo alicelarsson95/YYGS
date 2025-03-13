@@ -16,7 +16,7 @@ const MyCart = () => {
   const loading = useSelector((state: RootState) => state.tenant.loading);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-
+  console.log("Tenant ID:", tenantId);
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   const handleCheckout = async () => {
@@ -49,10 +49,16 @@ const MyCart = () => {
   return (
     <div className="cart-page">
       <img src={CartIcon} alt="Cart" className="cart__icon" />
-      <h2 className="cart-title">Min Beställning</h2>
+      {cartItems.length > 0 && <h2 className="cart-title">Min Beställning</h2>}
 
       {cartItems.length === 0 ? (
-        <p className="empty-cart">Din varukorg är tom.</p>
+        <div className="empty-cart">
+          <h2>Din varukorg är tom</h2>
+          <p>Det ser inte ut som att du har lagt något i varukorgen ännu.</p>
+          <a href="/" className="shop-link">
+            Tillbaka till menyn
+          </a>
+        </div>
       ) : (
         <div className="cart-container">
           <CartList items={cartItems} onRemove={(id) => dispatch(removeFromCart(id))} />

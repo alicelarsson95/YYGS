@@ -1,4 +1,3 @@
-
 interface CartSummary {
   total: number;
   onCheckout: () => void;

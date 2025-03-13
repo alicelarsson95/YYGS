@@ -14,7 +14,8 @@
   }
   
   .header__wrapper {
-    width: 100%; 
+    position: sticky;
+    min-width: 100%; 
     display: flex;
     justify-content: space-between; 
     align-items: center;

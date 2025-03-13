@@ -34,7 +34,8 @@
   margin-left: -1rem;
 }
 
-@media (max-width:370px) {
+
+
 ::-webkit-scrollbar {
   width: 0.5rem; 
 }
@@ -53,5 +54,4 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: lighten($bg-color-black, 10%);
-}
 }
