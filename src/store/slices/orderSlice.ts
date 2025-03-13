@@ -16,7 +16,6 @@ const initialState: OrderState = {
   error: null,
 };
 
-
 export const createOrderThunk = createAsyncThunk(
   "order/createOrder",
   async (orderItems: any[], { getState, rejectWithValue }) => {
@@ -29,7 +28,7 @@ export const createOrderThunk = createAsyncThunk(
 
     try {
       const data = await createOrderAPI(orderItems, tenantId);
-      return data.order; 
+      return data.order;
     } catch (error: any) {
       return rejectWithValue(error.message);
     }
@@ -70,11 +69,11 @@ const orderSlice = createSlice({
       state.status = "idle";
       state.error = null;
     },
-  }, 
+  },
 
   extraReducers: (builder) => {
     builder
-     
+
       .addCase(createOrderThunk.pending, (state) => {
         state.status = "loading";
         state.error = null;
@@ -88,8 +87,6 @@ const orderSlice = createSlice({
         state.status = "failed";
         state.error = action.payload as string;
       })
-
-      // 🔹 Hantera hämtning av orderstatus
       .addCase(fetchOrderStatus.pending, (state) => {
         state.status = "loading";
         state.error = null;
@@ -105,7 +102,6 @@ const orderSlice = createSlice({
       });
   },
 });
-
 
 export const { setOrder, clearOrder } = orderSlice.actions;
 export default orderSlice.reducer;

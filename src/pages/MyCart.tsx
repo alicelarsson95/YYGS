@@ -1,41 +1,46 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../store/store";
-import { removeFromCart, clearCart } from "../store/slices/cartSlice";
+import { removeFromCart, clearCart, updateQuantity } from "../store/slices/cartSlice";
 import { useNavigate } from "react-router-dom";
-import "../styles/pages/myCart.scss";
-import CartIcon from "../assets/Union.svg";
-import { createOrder } from "../services/api";
 import { getTenant } from "../store/slices/tenantSlice";
 import { setOrder } from "../store/slices/orderSlice";
+import { createOrder } from "../services/api";
+import "../styles/pages/myCart.scss";
+import CartIcon from "../assets/Union.svg";
 import CartList from "../components/mycart/CartList";
 import CartSummary from "../components/mycart/CartSum";
+import { Link } from "react-router-dom";
+import { createSelector } from "@reduxjs/toolkit";
+
+const selectCartItems = createSelector(
+  (state: RootState) => state.cart.items,
+  (items) => [...items]
+);
 
 const MyCart = () => {
-  const cartItems = useSelector((state: RootState) => state.cart.items);
-  const tenantId = useSelector((state: RootState) => state.tenant.tenantId);
-  const loading = useSelector((state: RootState) => state.tenant.loading);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  console.log("Tenant ID:", tenantId);
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+  const cartItems = useSelector(selectCartItems);
+  const tenantId = useSelector((state: RootState) => state.tenant.tenantId);
+  const loading = useSelector((state: RootState) => state.tenant.loading);
+
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const getItemIds = () => cartItems.flatMap((item) => Array(item.quantity).fill(item.id));
 
   const handleCheckout = async () => {
     try {
-      let currentTenantId: string | undefined = tenantId ?? localStorage.getItem("tenantId") ?? undefined;
+      const currentTenantId =
+        tenantId || localStorage.getItem("tenantId") || (await dispatch(getTenant()).unwrap());
 
-      if (!currentTenantId) {
-        console.warn("Tenant-ID saknas! Skapar en ny tenant...");
-        currentTenantId = await dispatch(getTenant()).unwrap();
-      }
+      const itemIds = getItemIds();
+      console.log("Skickar beställning med:", itemIds);
 
-      const orderResponse = await createOrder(cartItems, currentTenantId);
-      console.log("Beställning skapad:", orderResponse);
-
-      if (orderResponse && orderResponse.order && orderResponse.order.id) {
-        const orderId = orderResponse.order.id;
-        const eta = orderResponse.order.eta ?? 0;
-        dispatch(setOrder({ orderId, eta }));
-        navigate(`/order-status/${orderId}`);
+      const orderResponse = await createOrder(itemIds, currentTenantId);
+      if (orderResponse?.order?.id) {
+        dispatch(setOrder({ orderId: orderResponse.order.id, eta: orderResponse.order.eta ?? 0 }));
+        navigate(`/order-status/${orderResponse.order.id}`);
       } else {
         console.error("Order-ID saknas i API-svar:", orderResponse);
       }
@@ -48,7 +53,9 @@ const MyCart = () => {
 
   return (
     <div className="cart-page">
-      <img src={CartIcon} alt="Cart" className="cart__icon" />
+      <Link to="/">
+        <img src={CartIcon} alt="Cart" className="cart__icon" />
+      </Link>
       {cartItems.length > 0 && <h2 className="cart-title">Min Beställning</h2>}
 
       {cartItems.length === 0 ? (
@@ -61,7 +68,17 @@ const MyCart = () => {
         </div>
       ) : (
         <div className="cart-container">
-          <CartList items={cartItems} onRemove={(id) => dispatch(removeFromCart(id))} />
+          <CartList
+            items={cartItems}
+            onRemove={(id, quantity) =>
+              dispatch(quantity > 1 ? updateQuantity({ id, quantity: quantity - 1 }) : removeFromCart(id))
+            }
+            onAdd={(id) =>
+              dispatch(
+                updateQuantity({ id, quantity: cartItems.find((item) => item.id === id)?.quantity! + 1 })
+              )
+            }
+          />
           <CartSummary total={totalPrice} onCheckout={handleCheckout} loading={loading} />
         </div>
       )}

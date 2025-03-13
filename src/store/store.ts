@@ -2,14 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice";
 import menuReducer from "./slices/menuSlice";
 import orderReducer from "./slices/orderSlice";
-import tenantReducer from "./slices/tenantSlice"
-
+import tenantReducer from "./slices/tenantSlice";
 
 export const store = configureStore({
   reducer: {
     tenant: tenantReducer,
     cart: cartReducer,
-    menu: menuReducer, 
+    menu: menuReducer,
     order: orderReducer,
   },
 });

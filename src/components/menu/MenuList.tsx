@@ -31,7 +31,6 @@ const MenuList = () => {
   const dips = items.filter((item) => item.type === "dip");
   const drinks = items.filter((item) => item.type === "drink");
 
-
   return (
     <div className="menu-list">
       {wontons.length > 0 && (

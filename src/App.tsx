@@ -1,16 +1,8 @@
-import { Outlet } from "react-router-dom"; 
-import { Provider } from "react-redux";
-import { router } from "./router";
-import "./styles/index.scss"; 
-
+import { Outlet } from "react-router-dom";
+import "./styles/index.scss";
 
 const App = () => {
-    return (
-     
-    <Outlet />
-      
-    );
+  return <Outlet />;
 };
-  
 
 export default App;

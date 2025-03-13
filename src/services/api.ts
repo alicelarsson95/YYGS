@@ -45,7 +45,7 @@ export const createOrder = async (orderItems: any[], tenantId?: string) => {
   const response = await fetch(`${API_BASE_URL}/${tenantId}/orders`, {
     method: "POST",
     headers: { "x-zocom": apiKey, "Content-Type": "application/json" },
-    body: JSON.stringify({ items: [orderItems.length] }),
+    body: JSON.stringify({ items: orderItems }),
   });
 
   if (!response.ok) throw new Error("Misslyckades att skapa order");

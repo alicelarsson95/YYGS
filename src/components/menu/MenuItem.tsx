@@ -33,7 +33,9 @@ const MenuItem = ({ item }: MenuItemProps) => {
         <span className="menu-item-name">{item.name}</span>
         <span className="menu-dots"></span>
         <span className="menu-item-price">{item.price} SEK</span>
-        <button className="menu-add-button" onClick={handleAddToCart}>+</button>
+        <button className="menu-add-button" onClick={handleAddToCart}>
+          +
+        </button>
       </div>
       <div className="menu-item-description">{item.description}</div>
       <div className="menu-separator"></div>
@@ -42,4 +44,3 @@ const MenuItem = ({ item }: MenuItemProps) => {
 };
 
 export default MenuItem;
-

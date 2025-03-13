@@ -28,7 +28,7 @@ const MenuGrid = ({ title, price, items }: MenuGridProps) => {
       <h2>{title}</h2>
       {price && <p>{price}</p>}
       <div className="grid">
-        {items.map(item => (
+        {items.map((item) => (
           <button key={item.id} className="grid-button" onClick={() => handleAddToCart(item)}>
             {item.name}
           </button>
@@ -39,4 +39,3 @@ const MenuGrid = ({ title, price, items }: MenuGridProps) => {
 };
 
 export default MenuGrid;
-

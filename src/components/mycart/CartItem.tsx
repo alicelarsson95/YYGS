@@ -1,21 +1,27 @@
 interface CartItemProps {
-    id: number;
-    name: string;
-    price: number;
-    onRemove: (id: number) => void;
-  }
-  
-  const CartItem = ({ id, name, price, onRemove }: CartItemProps) => {
-    return (
-      <li className="cart-item">
-        <span className="item-name">{name}</span>
-        <span className="item-price">{price} SEK</span>
-        <button onClick={() => onRemove(id)} className="remove-button">
-          ❌
-        </button>
-      </li>
-    );
-  };
-  
-  export default CartItem;
-  
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  onRemove: (id: number, quantity: number) => void;
+  onAdd: (id: number) => void;
+}
+
+const CartItem = ({ id, name, price, quantity, onRemove, onAdd }: CartItemProps) => {
+  return (
+    <li className="cart-item">
+      <span className="item-name">
+        {name} <span className="item-quantity">{quantity} ST</span>
+      </span>
+      <span className="item-price">{price} SEK</span>
+      <button onClick={() => onRemove(id, quantity)} className="remove-button">
+        -
+      </button>
+      <button onClick={() => onAdd(id)} className="add-button">
+        +
+      </button>
+    </li>
+  );
+};
+
+export default CartItem;

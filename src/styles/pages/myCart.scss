@@ -41,14 +41,15 @@
     min-height: 70vh;
     background: white;
     padding: 2rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 10px rgba(64, 110, 66, 0.575);
   }
 
   .cart-list {
-    flex-grow: 1;
     width: 100%;
     list-style: none;
     margin-top: 1rem;
+
+
   }
 
   .cart-item {
@@ -74,6 +75,15 @@
     border: none;
     cursor: pointer;
     margin-left: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .add-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 1rem;
+    font-size: 1.2rem;
   }
 
   .cart-total {
@@ -126,12 +136,11 @@
     display: inline-block;
     padding: 0.4rem 3rem;
     background-color: $bg-color-secondary;
-    color: white;
+    color: $bg-color-black;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     transition: background 0.3s ease;
     white-space: nowrap;
-
   }
 }

@@ -6,7 +6,6 @@
   background-color: $bg-color-secondary;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .menu-container {
@@ -21,9 +20,9 @@
   border-radius: $border-radius-primary;
   color: $color-white;
   padding: 1.5rem;
-  box-sizing: border-box;
   overflow: hidden;
-  margin-top: 3rem;
+  margin-top: 8rem;
+  box-shadow: 0px 5px 10px rgba(24, 41, 25, 0.575);
 }
 
 .menu-title {
@@ -34,23 +33,18 @@
   margin-left: -1rem;
 }
 
-
-
 ::-webkit-scrollbar {
-  width: 0.5rem; 
+  width: 0.2rem;
 }
-
 
 ::-webkit-scrollbar-track {
-  background: $bg-color-primary; 
+  background: $bg-color-primary;
 }
-
 
 ::-webkit-scrollbar-thumb {
-  background: $bg-color-light-grey; 
-  border-radius: $border-radius-primary; 
+  background: $bg-color-light-grey;
+  border-radius: $border-radius-primary;
 }
-
 
 ::-webkit-scrollbar-thumb:hover {
   background: lighten($bg-color-black, 10%);

@@ -1,28 +1,67 @@
 @use "../../Partials/Variables" as *;
 
 .header__con {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 8rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 2rem;
-    z-index: 1000;
-  }
-  
-  .header__wrapper {
-    position: sticky;
-    min-width: 100%; 
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-  }
-  
-  .header-logo {
-    height: 4rem;
-    margin-bottom: 1.5rem;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  z-index: 1000;
+}
+
+.header__wrapper {
+  min-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  height: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.cart__con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cart__icon {
+  width: 50%;
+}
+
+.icon__con {
+  background-color: $bg-color-white;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: $border-radius-primary;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+}
+
+.cart__count {
+  position: absolute;
+  background: rgb(232, 79, 79);
+  color: $color-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  text-align: center;
+  border-radius: 50%;
+  width: 1.4rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.8rem;
+  margin-left: 4rem;
+}
