@@ -13,9 +13,9 @@
 .menu-item {
   max-width: 100%;
   background-color: $bg-color-primary;
-  padding: 0.5rem;
-  border-radius: $border-radius-primary;
-  margin-bottom: 0.5rem;
+  padding: $font-size-sm;
+
+  margin-bottom: $font-size-sm;
 }
 
 .menu-item-header {
@@ -29,13 +29,13 @@
 }
 
 .menu-item-name {
-  font-size: 1.2rem;
+  font-size: $font-size-xl;
 }
 
 .menu-dots {
   flex-grow: 1;
-  border-bottom: 2px dotted rgba(209, 205, 205, 0.773); // Punkter mellan namn och pris
-  margin: 0 0.5rem;
+  border-bottom: 2px dotted rgba($color-white, 0.6); 
+  margin: 0 $font-size-sm;
 }
 
 .menu-item-price {
@@ -43,33 +43,33 @@
 }
 
 .menu-item-description {
-  margin-top: 0.3rem;
+  margin-top: $font-size-xs;
   font-size: $font-size-sm;
   font-weight: $font-weight-normal;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba($color-white, 0.8);
 }
 
 .menu-separator {
-  border-bottom: 2px dotted rgba(255, 255, 255, 0.103); // Skapar en svagare punktlinje
-  margin-top: 1rem;
+  border-bottom: 2px dotted rgba($color-white, 0.1); 
+  margin-top: $font-size-lg;
 }
 
 .menu-add-button {
   background-color: $bg-color-secondary;
-  color: white;
-  font-size: 1.2rem;
+  color: $color-white;
+  font-size: $font-size-xl;
   border: none;
-  border-radius: 50%;
-  width: 1.2rem;
-  height: 1.2rem;
+  border-radius: 1rem;;
+  width: $font-size-xl;
+  height: $font-size-xl;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 0.3s;
-  margin-left: 1rem;
+  margin-left: $font-size-md;
 
   &:hover {
-    background-color: #4e6e50;
+    background-color: darken($bg-color-secondary, 10%);
   }
 }

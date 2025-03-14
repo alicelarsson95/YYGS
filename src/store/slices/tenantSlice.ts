@@ -12,12 +12,19 @@ const initialState: TenantState = {
   error: null as string | null,
 };
 
-export const getTenant = createAsyncThunk("tenant/createtenant", async (_, { rejectWithValue }) => {
+export const getTenant = createAsyncThunk("tenant/createtenant", async (_, { getState, rejectWithValue }) => {
+  const state = getState() as { tenant: TenantState };
+  let tenantId = state.tenant.tenantId ?? localStorage.getItem("tenantId");
+
+  if (tenantId) {
+    return tenantId; 
+  }
+
   try {
     const apiKey = localStorage.getItem("apiKey") ?? "";
 
     if (!apiKey) {
-      return rejectWithValue("API-nyckel saknas..");
+      return rejectWithValue("API-nyckel saknas.");
     }
 
     const response = await fetch("https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com/tenants", {
@@ -28,14 +35,16 @@ export const getTenant = createAsyncThunk("tenant/createtenant", async (_, { rej
       },
       body: JSON.stringify({ name: "alicewontons" }),
     });
+
     if (!response.ok) {
       throw new Error(`API-fel: ${response.status}`);
     }
+
     const data = await response.json();
     localStorage.setItem("tenantId", data.id);
     return data.id;
   } catch (error: any) {
-    return rejectWithValue(error.message);
+    return rejectWithValue(error.response?.data?.message || error.message);
   }
 });
 

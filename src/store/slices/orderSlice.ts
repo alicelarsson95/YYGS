@@ -37,16 +37,9 @@ export const createOrderThunk = createAsyncThunk(
 
 export const fetchOrderStatus = createAsyncThunk(
   "order/fetchOrderStatus",
-  async (orderId: string, { getState, rejectWithValue }) => {
-    const state = getState() as RootState;
-    const tenantId = state.tenant.tenantId ?? localStorage.getItem("tenantId") ?? "";
-
-    if (!tenantId) {
-      return rejectWithValue("Tenant-ID saknas!");
-    }
-
+  async (orderId: string, { rejectWithValue }) => {
     try {
-      const data = await getOrderStatus(orderId, tenantId);
+      const data = await getOrderStatus(orderId);
       return data;
     } catch (error: any) {
       return rejectWithValue(error.message);

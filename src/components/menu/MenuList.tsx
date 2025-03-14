@@ -42,8 +42,8 @@ const MenuList = () => {
         </div>
       )}
 
-      <MenuGrid title="Dipsås" price="19 SEK" items={dips} />
-      <MenuGrid title="Drinks" price="19 SEK" items={drinks} />
+      <MenuGrid title="Dipsåser" price="19 SEK" items={dips} />
+      <MenuGrid title="Drycker" price="19 SEK" items={drinks} />
     </div>
   );
 };

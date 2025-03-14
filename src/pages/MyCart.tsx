@@ -33,9 +33,9 @@ const MyCart = () => {
     try {
       const currentTenantId =
         tenantId || localStorage.getItem("tenantId") || (await dispatch(getTenant()).unwrap());
-
+       
       const itemIds = getItemIds();
-      console.log("Skickar beställning med:", itemIds);
+      
 
       const orderResponse = await createOrder(itemIds, currentTenantId);
       if (orderResponse?.order?.id) {

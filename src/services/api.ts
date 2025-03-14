@@ -19,20 +19,6 @@ export const fetchApiKey = async (): Promise<string> => {
   return apiKey;
 };
 
-export const fetchMenu = async () => {
-  const apiKey = await fetchApiKey();
-
-  const response = await fetch(`${API_BASE_URL}/menu`, {
-    method: "GET",
-    headers: { "x-zocom": apiKey, "Content-Type": "application/json" },
-  });
-
-  if (!response.ok) throw new Error(`Misslyckades att hämta menyn: ${response.status}`);
-
-  const data = await response.json();
-  return data.items;
-};
-
 export const createOrder = async (orderItems: any[], tenantId?: string) => {
   const apiKey = await fetchApiKey();
 
