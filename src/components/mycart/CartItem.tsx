@@ -13,7 +13,7 @@ const CartItem = ({ id, name, price, quantity, onRemove, onAdd }: CartItemProps)
       <span className="item-name">
         {name} <span className="item-quantity">{quantity} ST</span>
       </span>
-      <span className="item-price">{price} SEK</span>
+      <span className="item-price">{price * quantity} SEK</span> 
       <button onClick={() => onRemove(id, quantity)} className="remove-button">
         -
       </button>
